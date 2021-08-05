@@ -1,7 +1,5 @@
-module "aci_scaffolding" {
-  source = "netascode/scaffolding/aci"
+module "aci_fabric_isis_bfd" {
+  source = "netascode/fabric-isis-bfd/aci"
 
-  name        = "ABC"
-  alias       = "ABC-ALIAS"
-  description = "My Description"
+  admin_state = true
 }

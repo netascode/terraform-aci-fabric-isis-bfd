@@ -14,35 +14,21 @@ terraform {
 module "main" {
   source = "../.."
 
-  name        = "ABC"
-  alias       = "ALIAS"
-  description = "DESCR"
+  admin_state = true
 }
 
-data "aci_rest" "fvTenant" {
-  dn = "uni/tn-ABC"
+data "aci_rest" "l3IfPol" {
+  dn = "uni/fabric/l3IfP-default"
 
   depends_on = [module.main]
 }
 
-resource "test_assertions" "fvTenant" {
-  component = "fvTenant"
+resource "test_assertions" "l3IfPol" {
+  component = "l3IfPol"
 
-  equal "name" {
-    description = "name"
-    got         = data.aci_rest.fvTenant.content.name
-    want        = "ABC"
-  }
-
-  equal "nameAlias" {
-    description = "nameAlias"
-    got         = data.aci_rest.fvTenant.content.nameAlias
-    want        = "ALIAS"
-  }
-
-  equal "descr" {
-    description = "descr"
-    got         = data.aci_rest.fvTenant.content.descr
-    want        = "DESCR"
+  equal "bfdIsis" {
+    description = "bfdIsis"
+    got         = data.aci_rest.l3IfPol.content.bfdIsis
+    want        = "enabled"
   }
 }
