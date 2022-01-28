@@ -5,8 +5,8 @@ terraform {
     }
 
     aci = {
-      source  = "netascode/aci"
-      version = ">=0.2.0"
+      source  = "CiscoDevNet/aci"
+      version = ">=2.0.0"
     }
   }
 }
@@ -17,7 +17,7 @@ module "main" {
   admin_state = true
 }
 
-data "aci_rest" "l3IfPol" {
+data "aci_rest_managed" "l3IfPol" {
   dn = "uni/fabric/l3IfP-default"
 
   depends_on = [module.main]
@@ -28,7 +28,7 @@ resource "test_assertions" "l3IfPol" {
 
   equal "bfdIsis" {
     description = "bfdIsis"
-    got         = data.aci_rest.l3IfPol.content.bfdIsis
+    got         = data.aci_rest_managed.l3IfPol.content.bfdIsis
     want        = "enabled"
   }
 }

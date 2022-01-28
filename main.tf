@@ -1,4 +1,4 @@
-resource "aci_rest" "l3IfPol" {
+resource "aci_rest_managed" "l3IfPol" {
   dn         = "uni/fabric/l3IfP-default"
   class_name = "l3IfPol"
   content = {
